@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors Page</title>
+
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+        }
+    </script>
+    <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+    <script>
+        if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
+</head>
+<body class="bg-white dark:bg-gray-900">
+
+    <nav class="bg-gray-800">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="relative flex items-center justify-between h-16">
+                <div class="flex-1 flex items-center justify-start">
+                    <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-400 bg-clip-text text-transparent" style="font-family: 'Pacifico', cursive;">
+                        CareSync
+                    </h1>
+                </div>
+                <div class="hidden md:flex md:space-x-4">
+                    <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+                    <a href="doctors.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">Doctors</a>
+                    <a href="Myapplication.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">My App</a>
+                    <a href="contact.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+                </div>
+                <div class="flex-1 flex items-center justify-end">
+                    <button id="toggleDarkMode" class="p-2 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+                        <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+                        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+                    </button>
+                    <button type="button" id="menu-toggle" class="ml-4 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden" aria-controls="mobile-menu" aria-expanded="false">
+                        <span class="sr-only">Open main menu</span>
+                        <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+                        <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div class="md:hidden hidden" id="mobile-menu">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="index.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+                <a href="doctors.html" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">Doctors</a>
+                <a href="Myapplication.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">My App</a>
+                <a href="contact.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="bg-neutral-200 dark:bg-gray-800 p-4 md:p-8">
+        <div class="flex flex-wrap justify-center gap-6 p-2 md:p-6">
+            
+            <!-- Card 1 -->
+            <div class="bg-sky-600 dark:bg-sky-700 rounded-lg shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center font-bold text-white p-6">
+                <img src="https://plus.unsplash.com/premium_photo-1658506671316-0b293df7c72b?fm=jpg&q=60&w=3000&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MXx8ZG9jdG9yfGVufDB8fDB8fHww" alt="Doctor Elias Jonathan" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Elias Jonathan</h3>
+                <p class="text-sm text-center mb-2 flex-grow">This doctor doesn't accept online booking at the moment</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: dentist</p>
+                <p class="text-sm text-center mb-4">📍location: Elshiekh Zayed</p>
+                <button class="bg-gray-300 text-gray-600 px-4 py-2 rounded cursor-not-allowed">Not Available</button>
+            </div>
+            
+            <!-- Card 2 -->
+            <div class="bg-sky-600 dark:bg-sky-700 font-bold rounded-lg shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center text-white p-6">
+                <img src="https://thumbs.dreamstime.com/b/doctor-holding-digital-tablet-meeting-room-portrait-beautiful-mature-woman-looking-camera-confident-female-using-164999229.jpg" alt="Doctor Emma Elias" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Emma Elias</h3>
+                <p class="text-sm text-center mb-2 flex-grow">Cares for children's health and developmental needs daily</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: Pediatrician</p>
+                <p class="text-sm text-center mb-4">📍location: Tanta</p>
+                <button class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Book now</button>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="bg-sky-600 dark:bg-sky-700 font-bold rounded-lg shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center text-white p-6">
+                <img src="https://static.vecteezy.com/system/resources/thumbnails/026/375/249/small_2x/ai-generative-portrait-of-confident-male-doctor-in-white-coat-and-stethoscope-standing-with-arms-crossed-and-looking-at-camera-photo.jpg" alt="Doctor Mateo Carlos" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Mateo Carlos</h3>
+                <p class="text-sm text-center mb-2 flex-grow">Treats skin, hair, and nail conditions with care and expertise daily</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: Dermatologist</p>
+                <p class="text-sm text-center mb-4">📍location: New cairo</p>
+                <button class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Book now</button>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="bg-sky-600 dark:bg-sky-700 font-bold rounded-lg shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center text-white p-6">
+                <img src="https://media.istockphoto.com/id/638647058/photo/we-offer-our-patients-premium-healthcare-here.jpg?s=612x612&w=0&k=20&c=pek5ehwgsZNPemeEh4bObQ1U5DRPEs0WHleosG-daa8=" alt="Doctor Sofia Mateo" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Sofia Mateo</h3>
+                <p class="text-sm text-center mb-2 flex-grow">Specializes in women's reproductive health, pregnancy, and hormonal issues daily</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: Gynaecologist</p>
+                <p class="text-sm text-center mb-4">📍location: Giza</p>
+                <button class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Book now</button>
+            </div>
+
+            <!-- Card 5 -->
+            <div class="bg-sky-600 dark:bg-sky-700 font-bold rounded-lg shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center text-white p-6">
+                <img src="https://www.shutterstock.com/image-photo/portrait-handsome-male-doctor-stethoscope-600nw-2480850611.jpg" alt="Doctor Daniel Joseph" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Daniel Joseph</h3>
+                <p class="text-sm text-center mb-2 flex-grow">Diagnoses and treats eye diseases, vision problems, and performs surgery</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: Ophthalmologist</p>
+                <p class="text-sm text-center mb-4">📍location: Giza</p>
+                <button class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Book now</button>
+            </div>
+
+            <!-- Card 6 -->
+            <div class="bg-sky-600 dark:bg-sky-700 rounded-lg font-bold shadow-md w-full max-w-sm md:w-auto md:max-w-xs cursor-pointer hover:shadow-lg transition-shadow flex flex-col items-center text-white p-6">
+                <img src="https://media.istockphoto.com/id/1373258655/photo/happy-nurse-at-hospital.jpg?s=612x612&w=0&k=20&c=mt8_LDMnWZHxAVm64SjmqBqbsTnrmDI3DlCq-jv3afA=" alt="Doctor Layla Tariq" class="w-full h-56 object-cover rounded-md mb-4"/>
+                <h3 class="text-xl font-semibold mb-2">Layla Tariq</h3>
+                <p class="text-sm text-center mb-2 flex-grow">Manages pain, monitors vital signs, and ensures safety during surgery</p>
+                <p class="text-sm text-center mb-2">⚕️specialty: Anesthesiologist</p>
+                <p class="text-sm text-center mb-4">📍location: Cairo</p>
+                <button class="bg-white text-black px-4 py-2 rounded hover:bg-gray-200">Book now</button>
+            </div>
+        </div>
+    </div>
+
+    <footer class="bg-[#1B2431] text-white py-16">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-10 md:space-y-0">
+            <div><h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-400 bg-clip-text text-transparent" style="font-family: 'Pacifico', cursive;">CareSync</h1></div>
+            <div>
+                <h2 class="text-xl font-bold mb-2">About</h2>
+                <ul class="space-y-1"><li><a href="#" class="text-blue-500 font-bold hover:underline">About Us</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">For Doctors</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">Press</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">Blog</a></li></ul>
+            </div>
+            <div>
+                <h2 class="text-xl font-bold mb-2">Help</h2><ul><li><a href="#" class="text-blue-500 font-bold hover:underline">Contact</a></li></ul>
+            </div>
+        </div>
+    </footer>
+    <footer class="bg-[#1B2431] text-white py-6 border-t border-gray-700">
+        <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
+            <div><p>© Copyright CareSync</p></div>
+            <div class="flex justify-center gap-x-6"><a href="#" class="text-blue-500 font-bold hover:underline">Privacy Policy</a><a href="#" class="text-blue-500 font-bold hover:underline">Terms of Use</a><a href="#" class="text-blue-500 font-bold hover:underline">Cookie Policy</a></div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const menuToggleBtn = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            if (menuToggleBtn) {
+                menuToggleBtn.addEventListener('click', () => {
+                    mobileMenu.classList.toggle('hidden');
+                });
+            }
+
+            const themeToggleBtn = document.getElementById('toggleDarkMode');
+            const htmlElement = document.documentElement;
+            const moonIcon = document.getElementById('moon-icon');
+            const sunIcon = document.getElementById('sun-icon');
+            
+            function updateThemeIcon() {
+                if (htmlElement.classList.contains('dark')) {
+                    moonIcon.classList.add('hidden');
+                    sunIcon.classList.remove('hidden');
+                } else {
+                    moonIcon.classList.remove('hidden');
+                    sunIcon.classList.add('hidden');
+                }
+            }
+
+            if (themeToggleBtn) {
+                themeToggleBtn.addEventListener('click', () => {
+                    htmlElement.classList.toggle('dark');
+                    if (htmlElement.classList.contains('dark')) {
+                        localStorage.setItem('theme', 'dark');
+                    } else {
+                        localStorage.setItem('theme', 'light');
+                    }
+                    updateThemeIcon();
+                });
+            }
+            
+            updateThemeIcon();
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Book Appointment - CareSync</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+    }
+  </script>
+  <link href="https://cdn.boxicons.com/fonts/basic/boxicons.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+  <script src="https://unpkg.com/vue@3"></script>
+  <script>
+    if (localStorage.getItem('theme') === 'dark' || (!('theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  </script>
+</head>
+
+<body class="bg-gray-100 dark:bg-gray-900 font-[Poppins]">
+
+  
+  <nav class="bg-gray-800">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="relative flex items-center justify-between h-16">
+        <div class="flex-1 flex items-center justify-start">
+          <h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-400 bg-clip-text text-transparent" style="font-family: 'Pacifico', cursive;">
+            CareSync
+          </h1>
+        </div>
+        <div class="hidden md:flex md:space-x-4">
+          <a href="index.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Home</a>
+          <a href="doctors.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Doctors</a>
+          <!-- Set My App as the active page -->
+          <a href="Myapplication.html" class="rounded-md bg-gray-900 px-3 py-2 text-sm font-medium text-white">My App</a>
+          <a href="contact.html" class="rounded-md px-3 py-2 text-sm font-medium text-gray-300 hover:bg-gray-700 hover:text-white">Contact</a>
+        </div>
+        <div class="flex-1 flex items-center justify-end">
+          <button id="toggleDarkMode" class="p-2 rounded-full text-gray-400 hover:text-white focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-white">
+            <svg id="moon-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z" /></svg>
+            <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z" /></svg>
+          </button>
+          <button type="button" id="menu-toggle" class="ml-4 inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-white md:hidden" aria-controls="mobile-menu" aria-expanded="false">
+            <span class="sr-only">Open main menu</span>
+            <svg class="block h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" /></svg>
+            <svg class="hidden h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" /></svg>
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="md:hidden hidden" id="mobile-menu">
+      <div class="px-2 pt-2 pb-3 space-y-1">
+        <a href="index.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Home</a>
+        <a href="doctors.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Doctors</a>
+        <a href="Myapplication.html" class="bg-gray-900 text-white block px-3 py-2 rounded-md text-base font-medium">My App</a>
+        <a href="contact.html" class="text-gray-300 hover:bg-gray-700 hover:text-white block px-3 py-2 rounded-md text-base font-medium">Contact</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="min-h-screen flex flex-col items-center justify-center px-4 py-12 space-y-12">
+    <div class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-10 w-full max-w-2xl">
+      <h1 class="text-4xl font-bold text-center text-gray-800 dark:text-white mb-8">Book an appointment</h1>
+      <div class="flex justify-center space-x-10 text-blue-500 text-base font-medium mb-5">
+        <div class="flex items-center space-x-2"><i class="fas fa-bolt text-xl"></i><span>Instant</span></div>
+        <div class="flex items-center space-x-2"><i class="fas fa-truck-medical text-xl"></i><span>Convenient</span></div>
+        <div class="flex items-center space-x-2"><i class="fas fa-shield-alt text-xl"></i><span>Reliable</span></div>
+      </div>
+      <p class="text-center text-gray-500 dark:text-gray-300 mb-8 text-base">Book instantly. At your doorstep. Trusted providers.</p>
+      <div class="mb-6 px-4">
+        <label for="service" class="block text-gray-700 dark:text-gray-200 font-semibold mb-2 text-lg">Select service</label>
+        <select id="service" class="w-full bg-gray-50 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md px-4 py-3 text-gray-700 dark:text-gray-100 text-base focus:outline-none focus:ring-2 focus:ring-blue-500">
+          <option>Select..</option>
+          <option>General Consultation</option>
+          <option>Telehealth</option>
+          <option>Home Visit</option>
+        </select>
+      </div>
+      <div class="px-4">
+        <button class="w-full bg-blue-500 hover:bg-blue-600 text-white text-lg font-semibold py-3 rounded-md transition duration-300">
+          Book Now
+        </button>
+      </div>
+    </div>
+
+    <!-- Vue App Section -->
+    <div id="app" class="bg-white dark:bg-gray-800 shadow-2xl rounded-2xl p-10 w-full max-w-2xl text-gray-800 dark:text-white">
+        <h1 class="text-3xl font-bold mb-4 border-b pb-2 dark:border-gray-600">My Booked Appointments</h1>
+        <div v-if="bookings.length === 0" class="text-gray-500 dark:text-gray-400">You have no bookings.</div>
+        <ul class="space-y-2">
+          <li v-for="(booking, index) in bookings" :key="index" class="p-2 bg-gray-50 dark:bg-gray-700 rounded-md">
+            {{ booking.name }} - {{ booking.specialty }}
+          </li>
+        </ul>
+      </div>
+  </main>
+
+  
+  <footer class="bg-[#1B2431] text-white py-16">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center text-center md:text-left space-y-10 md:space-y-0">
+      <div><h1 class="text-3xl font-bold bg-gradient-to-r from-blue-600 via-blue-500 to-green-400 bg-clip-text text-transparent" style="font-family: 'Pacifico', cursive;">CareSync</h1></div>
+      <div>
+        <h2 class="text-xl font-bold mb-2">About</h2>
+        <ul class="space-y-1"><li><a href="#" class="text-blue-500 font-bold hover:underline">About Us</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">For Doctors</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">Press</a></li><li><a href="#" class="text-blue-500 font-bold hover:underline">Blog</a></li></ul>
+      </div>
+      <div>
+        <h2 class="text-xl font-bold mb-2">Help</h2><ul><li><a href="#" class="text-blue-500 font-bold hover:underline">Contact</a></li></ul>
+      </div>
+    </div>
+  </footer>
+  <footer class="bg-[#1B2431] text-white py-6 border-t border-gray-700">
+    <div class="max-w-6xl mx-auto px-4 flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0 text-center md:text-left">
+      <div><p>© Copyright CareSync</p></div>
+      <div class="flex justify-center gap-x-6"><a href="#" class="text-blue-500 font-bold hover:underline">Privacy Policy</a><a href="#" class="text-blue-500 font-bold hover:underline">Terms of Use</a><a href="#" class="text-blue-500 font-bold hover:underline">Cookie Policy</a></div>
+    </div>
+  </footer>
+
+  
+  <script>
+    // Vue App for Bookings
+    const { createApp } = Vue;
+    createApp({
+      data() {
+        return {
+          bookings: []
+        }
+      },
+      mounted() {
+        const saved = localStorage.getItem('bookings');
+        if (saved) {
+          this.bookings = JSON.parse(saved);
+        }
+      }
+    }).mount('#app');
+
+    document.addEventListener('DOMContentLoaded', () => {
+      const menuToggleBtn = document.getElementById('menu-toggle');
+      const mobileMenu = document.getElementById('mobile-menu');
+      if (menuToggleBtn) {
+        menuToggleBtn.addEventListener('click', () => {
+          mobileMenu.classList.toggle('hidden');
+        });
+      }
+
+      const themeToggleBtn = document.getElementById('toggleDarkMode');
+      const htmlElement = document.documentElement;
+      const moonIcon = document.getElementById('moon-icon');
+      const sunIcon = document.getElementById('sun-icon');
+      
+      function updateThemeIcon() {
+        if (htmlElement.classList.contains('dark')) {
+          moonIcon.classList.add('hidden');
+          sunIcon.classList.remove('hidden');
+        } else {
+          moonIcon.classList.remove('hidden');
+          sunIcon.classList.add('hidden');
+        }
+      }
+
+      if (themeToggleBtn) {
+        themeToggleBtn.addEventListener('click', () => {
+          htmlElement.classList.toggle('dark');
+          if (htmlElement.classList.contains('dark')) {
+            localStorage.setItem('theme', 'dark');
+          } else {
+            localStorage.setItem('theme', 'light');
+          }
+          updateThemeIcon();
+        });
+      }
+      
+      updateThemeIcon();
+    });
+  </script>
+
+</body>
+</html>
